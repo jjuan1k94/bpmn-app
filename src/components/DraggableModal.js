@@ -1,36 +1,19 @@
-import React from 'react';
-import Draggable from 'react-draggable';
+import React, { useEffect } from 'react';
+import Modal from './Modal';
 import '../assets/css/components/DraggableModal.css';
+//No està funcionando
+const refModal = React.createRef();
 
-const DraggableModal = (props) => {
-    const { header, children, footer, isOpen, onRequestClose, size } = props;
-
-    if (isOpen) {
-        return (
-            <Draggable>
-                <div className='bpm-modal-draggable modal' tabIndex="-1" role="dialog">
-                    <div className={`modal-dialog ${size ? 'modal-' + size : ''}`} role="document">
-                        <div className='modal-content'>
-                            <div className="modal-header">
-                                {header}
-                                <button type="button" className="close" aria-label="Close" onClick={onRequestClose}>
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                {children}
-                            </div>
-                            {
-                                footer && <div className="modal-footer">
-                                    {footer}
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </Draggable>
-        )
-    }
-    return '';
+const DraggableModal = (props) => {    
+    useEffect(() => {
+        const { $ } = window;
+        if(!$){
+            console.error('jquery no está instanciado');
+            return;
+        }
+        console.log('draggable');
+        $(refModal.current).draggable();
+    },[props.isOpen])
+    return  <Modal innerRef={refModal} {...props} />;
 }
 export default DraggableModal;

@@ -32,8 +32,11 @@ export const EVENT_DEFINITIONS = {
     ERROR: 'bpmn:ErrorEventDefinition'
 }
 
-export const CUSTOM_PROPS ={
-    TIMEOUT:'bpmn:timeout'
+export const CUSTOM_PROPS = {
+    TIMEOUT: 'bpmn:timeout',
+    BASIC_FORMS: 'bpmn:basicForms',
+    MESSAGE_TOPIC:'bpmn:MessageEventTopic',
+    SIGNAL_TOPIC:'bpmn:SignalEventTopic'
 }
 //Agregar evento a shape
 export const attachBoundaryEvent2Shape = (modeler, shape, eventDefinitionType) => {
@@ -71,15 +74,39 @@ export const isEvent = (shape) => {
     return index > -1 ? true : false;
 }
 
-export const updatePropShape = (modeler, shape, propName, propValue) => {
-    
+export const updateCustomProperty = (modeler, shape, propName, propValue) => {
+
     const keys = Object.keys(CUSTOM_PROPS);
-    const index = keys.findIndex(key =>  CUSTOM_PROPS[key] === propName);
-    if(index < 0){
+    const index = keys.findIndex(key => CUSTOM_PROPS[key] === propName);
+    if (index < 0) {
         console.error('propiedad no definida en las custom_props');
         return;
     }
-    
+    if (typeof (propValue) === 'object' || typeof (propValue) === 'function') {
+        console.warn(`No se pueden guardar objetos o funciones, 
+            estos se guardaran en formato json ó script string,
+                 estos tipos no son exportables`)
+
+        if (typeof (propValue) === 'object') {
+            propValue = JSON.stringify(propValue);
+        } else {
+            propValue = propValue.toString();
+        }
+    }
     const modeling = modeler.get(PROPS_MODELER.MODELING);
-    modeling.updateProperties(shape,{[propName]: propValue})
+    modeling.updateProperties(shape, { [propName]: propValue })
+}
+
+export const getCustomProperty = (shape, propName) => {
+    const keys = Object.keys(CUSTOM_PROPS);
+    const index = keys.findIndex(key => CUSTOM_PROPS[key] === propName);
+
+    if (index < 0) {
+        if (index < 0) {
+            console.error('propiedad no definida en las custom_props');
+            return;
+        }
+    }
+    const propsValue = shape.businessObject.$attrs[propName];
+    return propsValue;
 }

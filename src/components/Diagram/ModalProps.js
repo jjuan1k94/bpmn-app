@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ROOT_ID_PORTAL } from '../../assets/types';
 import DraggableModal from '../DraggableModal';
 import FormProps from './FormProps';
-import ActionsForm from './forms-config/ActionsForm';
+import EventsForm from './forms-config/EventsForm';
 
 
 const ModalProps = (props) => {
@@ -14,7 +14,7 @@ const ModalProps = (props) => {
             onRequestClose={onRequestClose}
             size='lg'
             header='Configuración de elemento'
-            footer={<ActionsForm modeler={modeler} shape={shape}/>}
+            footer={<EventsForm modeler={modeler} shape={shape}/>}
             >
             <FormProps 
                 key={shape.id}

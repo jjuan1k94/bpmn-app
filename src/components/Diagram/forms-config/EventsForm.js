@@ -3,14 +3,14 @@ import { is } from 'bpmn-js/lib/util/ModelUtil';
 import { TASK_TYPES, EVENT_DEFINITIONS, attachBoundaryEvent2Shape } from '../bpmn-types/TypesDiagram';
 
 
-const ActionButton = (props) =>
+const AttachEventButton = (props) =>
     (
         <button className='btn' onClick={props.onClick}>
             {props.text}
         </button>
     )
 
-const ActionsForm = (props) => {
+const EventsForm = (props) => {
     const { modeler, shape } = props;
 
 
@@ -51,18 +51,18 @@ const ActionsForm = (props) => {
             {
                 is(shape, TASK_TYPES.GENERAL) && 
                 <>
-                    <ActionButton text='Attach Time Event' onClick={_attachTimeOut} />
-                    <ActionButton text='Attach Message Event' onClick={_attachMessageEvent} />
-                    <ActionButton text='Attach Message Event' onClick={_attachSignalEvent} />
-                    <ActionButton text='Attach Conditional Event' onClick={_attachConditionalEvent} />
+                    <AttachEventButton text='Attach Time Event' onClick={_attachTimeOut} />
+                    <AttachEventButton text='Attach Message Event' onClick={_attachMessageEvent} />
+                    <AttachEventButton text='Attach Message Event' onClick={_attachSignalEvent} />
+                    <AttachEventButton text='Attach Conditional Event' onClick={_attachConditionalEvent} />
                 </>
             }
             {
                 is(shape, TASK_TYPES.GENERAL) && (is(shape,TASK_TYPES.SERVICE) || is(shape, TASK_TYPES.SCRIPT)) &&
-                <ActionButton text='Attach Error Event' onClick={_attachErrorEvent} />
+                <AttachEventButton text='Attach Error Event' onClick={_attachErrorEvent} />
             }
         </div>
     )
 }
 
-export default ActionsForm;
+export default EventsForm;
