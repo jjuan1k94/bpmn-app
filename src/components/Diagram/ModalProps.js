@@ -12,7 +12,7 @@ const ModalProps = (props) => {
         <DraggableModal 
             isOpen={isOpen} 
             onRequestClose={onRequestClose}
-            size='xl'
+            size='lg'
             header='Configuración de elemento'
             footer={<ActionsForm modeler={modeler} shape={shape}/>}
             >

@@ -1,3 +1,7 @@
 .bpm-modal-draggable{
     display: block !important;
+
+}
+.bpm-modal-draggable .modal-dialog {
+    margin: 0 !important;
 }

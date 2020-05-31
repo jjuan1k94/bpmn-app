@@ -95,9 +95,10 @@ import {
     }
   
     //no se usa porque se comento el objeto del palette para crear mas de uno 
-    function createParticipant(event) {
-      create.start(event, elementFactory.createParticipantShape());
-    }
+    //No borrar!!!
+    // function createParticipant(event) {
+    //   create.start(event, elementFactory.createParticipantShape());
+    // }
   
     // el segundo  objeto es el que devuelve los elementos del palette
     assign(actions, {

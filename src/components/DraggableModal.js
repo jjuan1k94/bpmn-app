@@ -9,8 +9,8 @@ const DraggableModal = (props) => {
         return (
             <Draggable>
                 <div className='bpm-modal-draggable modal' tabIndex="-1" role="dialog">
-                    <div className="modal-dialog" role="document">
-                        <div className={`modal-content ${size ? 'modal-' + size : ''}`}>
+                    <div className={`modal-dialog ${size ? 'modal-' + size : ''}`} role="document">
+                        <div className='modal-content'>
                             <div className="modal-header">
                                 {header}
                                 <button type="button" className="close" aria-label="Close" onClick={onRequestClose}>
