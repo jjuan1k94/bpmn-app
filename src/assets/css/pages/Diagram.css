@@ -1,0 +1,7 @@
+#bpm-diagram-container{
+    height: 100%;
+}
+#bpm-toolbox{
+    position: absolute;
+    bottom: 0;
+}

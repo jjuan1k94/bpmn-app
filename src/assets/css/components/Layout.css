@@ -1,0 +1,6 @@
+#bpm-navbar-layout{
+    height: 56px;
+}
+#bpm-app-body{
+    height: calc(100% - 56px);
+}
