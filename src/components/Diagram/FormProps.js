@@ -1,6 +1,5 @@
 import React, { useState} from 'react'
 import GeneralForm from './forms-config/GeneralForm';
-import ActionForm from './forms-config/ActionForm';
 
 const GENERAL_FORM = 'FORM_GENERAL';
 const RULE_FORM = 'RULE_FORM';
@@ -10,7 +9,7 @@ const FormProps = ({ modeler, shape }) => {
     let renderForm = '';
     switch(formActive){
         case RULE_FORM:
-            renderForm = <ActionForm modeler={modeler} shape={shape}/>
+            renderForm = '';
            break;
         default:
             renderForm = <GeneralForm modeler={modeler} shape={shape}/>;

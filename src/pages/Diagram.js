@@ -1,11 +1,14 @@
 import React from 'react';
 import BpmnJS from 'bpmn-js/lib/Modeler';
-import Toolbox from '../components/Diagram/ToolBox';
-import ModalProps from '../components/Diagram/ModalProps';
+import minimapModule from 'diagram-js-minimap';
+import customModules from '../components/diagram/bpmn-types/CustomModules';
+import Toolbox from '../components/diagram/ToolBox';
+import ModalProps from '../components/diagram/ModalProps';
 import { XML_DIAGRAMA } from '../assets/newDiagram';
+import 'bpmn-js/dist/assets/diagram-js.css';
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
+import 'diagram-js-minimap/assets/diagram-js-minimap.css';
 import '../assets/css/pages/Diagram.css';
-import '../../node_modules/bpmn-js/dist/assets/diagram-js.css'
-import '../../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css'
 
 const INITIAL_SATE = {
     modeler: null,
@@ -47,7 +50,7 @@ class Diagram extends React.Component {
     loadDiagram = async () => {
         const { modeler } = this.state;
         await modeler.importXML(XML_DIAGRAMA);
-
+        modeler.get('canvas').zoom('fit-viewport');
         modeler.on('selection.changed', (e) => {
             console.log('selection.changed')
             if (e.newSelection.length > 0) {
@@ -62,8 +65,14 @@ class Diagram extends React.Component {
 
     }
     componentDidMount() {
+        console.log(minimapModule);
         let _modeler = new BpmnJS({
-            container: this.refHostDiv.current
+            container: this.refHostDiv.current,
+            additionalModules:[
+                minimapModule,
+                customModules
+                // EmbeddedComments
+            ]
         })
         this.setState({ modeler: _modeler }, this.loadDiagram)
     }

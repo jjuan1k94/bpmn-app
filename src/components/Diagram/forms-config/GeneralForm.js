@@ -1,6 +1,7 @@
 import React from 'react';
 import WrapperInput from '../../WrapperInput';
 
+
 const MODELING_NAME ='modeling';
 const INITIAL_STROKE = 'black';
 const INITIAL_FILL = 'white';
